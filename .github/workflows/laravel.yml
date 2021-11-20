@@ -84,12 +84,12 @@ jobs:
     - name: Run Tests
       run: ./vendor/bin/phpunit
 
-   - name: Execute tests (Unit and Feature tests) via PHPUnit
-     env:
-      DB_CONNECTION: mysql
-      DB_DATABASE: db_test_laravel
-      DB_PORT: 33306
-      DB_USER: root
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
+      env:
+       DB_CONNECTION: mysql
+       DB_DATABASE: db_test_laravel
+       DB_PORT: 33306
+       DB_USER: root
      continue-on-error: true
      run: vendor/bin/phpunit --testdox
 
