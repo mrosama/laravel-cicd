@@ -92,7 +92,17 @@ jobs:
     - name: Start Build
       run : echo "Start deploy.."
 
-   notification:
+    - name: Upload Deployment Zip
+      uses: actions/upload-artifact@v2
+      with:
+        name: deployment_zip
+        path:  ./
+
+
+
+
+  notification:
+
    runs-on: ubuntu-latest
    needs: [build, lint,test,deploy]
 
