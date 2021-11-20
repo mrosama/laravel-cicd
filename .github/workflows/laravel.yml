@@ -125,7 +125,7 @@ jobs:
        DB_USER: root
       continue-on-error: true
       run: |
-        composer require --dev phpunit/phpunit: ^8.5.8
+        composer require --dev phpunit/phpunit
         vendor/bin/phpunit --testdox
 
 
