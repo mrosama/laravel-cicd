@@ -99,10 +99,15 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
+      env:
+       DB_CONNECTION: mysql
+       DB_DATABASE: db_test_laravel
+       DB_PORT: 33306
+       DB_USER: root
       continue-on-error: true
       run: |
-        composer require --dev phpunit/phpunit": ^8.5.8
-        vendor/bin/phpunit --verbose
+        composer require --dev phpunit/phpunit: ^8.5.8
+        vendor/bin/phpunit --testdox
 
 
   deploy:
