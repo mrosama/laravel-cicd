@@ -55,6 +55,9 @@ jobs:
         npm install
         npm run prod
 
+    - name: Install xmllint
+      run: sudo apt-get install libxml2-utils
+
     - name: Show dir
       run: pwd
 
@@ -73,9 +76,13 @@ jobs:
       run : echo phpinsights
 
     - name: Execute Code Sniffer via phpcs
+      continue-on-error: true
       run: |
         composer require --dev squizlabs/php_codesniffer
         vendor/bin/phpcs -n    --standard=PSR12 app
+
+    - name: Run PHPCS ignoring warnings
+      run: vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1
 
     - name: Execute Code phpinsights
       run: |
