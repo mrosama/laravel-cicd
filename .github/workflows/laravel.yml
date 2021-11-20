@@ -28,10 +28,10 @@ jobs:
         DB_PASSWORD: test
 
    steps:
-    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+    - uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4'
-        extensions: mbstring, gd, pdo, pdo_mysql
+        extensions: mbstring, gd, pdo, pdo_mysql,bcmath,dom, curl, libxml, zip, pcntl, sqlite, pdo_sqlite
 
     - uses: actions/checkout@v2
 
