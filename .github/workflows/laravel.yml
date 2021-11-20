@@ -95,9 +95,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - uses: symfonycorp/security-checker-action@v2
-    - name: phpinsights
-    #  run : vendor/bin/phpinsights
-      run : echo phpinsights
+
 
     - name: Execute Code Sniffer via phpcs
       continue-on-error: true

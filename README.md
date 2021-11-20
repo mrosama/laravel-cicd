@@ -127,3 +127,56 @@ deploy:
         DB_USER: root
 
       run: php artisan migrate
+===========================================================================
+
+name: Unit Tests
+
+on:
+  push:
+
+jobs:
+  unit-tests:
+    name: PHP ${{matrix.php}}, ${{matrix.stability}} deps
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: [7.0, 7.1, 7.2, 7.3, 7.4]
+        stability: [lowest, stable]
+        exclude:
+          - stability: lowest
+            php: 7.1
+          - stability: lowest
+            php: 7.2
+          - stability: lowest
+            php: 7.3
+          - stability: lowest
+            php: 7.4
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v1
+        with:
+          php-version: ${{matrix.php}}
+          extensions: dom, mbstring, xml # ctype, json, mbstring, openssl, xml, zip, zlib
+          coverage: none
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{steps.composer-cache.outputs.dir}}
+          key: ${{matrix.php}}-${{runner.os}}-composer-${{matrix.stability}}-${{hashFiles('**/composer.json')}}
+          restore-keys: ${{matrix.php}}-${{runner.os}}-composer-${{matrix.stability}}-
+
+      - name: Install dependencies
+        run: composer update --prefer-${{matrix.stability}} --prefer-dist --no-interaction --no-suggest --no-progress
+
+      - name: Execute tests
+        run: vendor/bin/phpunit
