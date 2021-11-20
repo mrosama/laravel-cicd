@@ -51,7 +51,9 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
 
     - name: Build frontend
-      run: npm run prod
+      run: |
+        npm install
+        npm run prod
 
     - name: Show dir
       run: pwd
