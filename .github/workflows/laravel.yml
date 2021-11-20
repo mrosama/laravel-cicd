@@ -18,7 +18,7 @@ jobs:
         env:
           MYSQL_DATABASE: laravel
           MYSQL_ROOT_PASSWORD: test
-        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+         options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
     env:
         DB_CONNECTION: mysql
         DB_HOST: 127.0.0.1
