@@ -64,6 +64,9 @@ jobs:
     - name: PHP Version
       run: php --version
 
+    - name: Run Tests
+      run: ./vendor/bin/phpunit
+
   lint:
    runs-on: ubuntu-latest
    needs: [build]
