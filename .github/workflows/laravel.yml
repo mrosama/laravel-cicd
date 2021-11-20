@@ -38,9 +38,6 @@ jobs:
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-    - name: Initalize MySQL
-      run: mysql -h 127.0.0.1 --port 3306 -uroot -ptest -e "$(cat docker/mysql/initdb.d/*.sql)"
-
     - name: Update Dependencies
       run: composer update
 
