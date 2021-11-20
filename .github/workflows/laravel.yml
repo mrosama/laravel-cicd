@@ -82,6 +82,7 @@ jobs:
         vendor/bin/phpcs -n    --standard=PSR12 app
 
     - name: Run PHPCS ignoring warnings
+      continue-on-error: true
       run: vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1 app
 
     - name: Execute Code phpinsights
